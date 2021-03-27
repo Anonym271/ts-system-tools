@@ -6,19 +6,13 @@
 
 KeyTable::KeyTable(int seed)
 {
-    std::cout << "Layout:" << std::hex
-        << "\n\tcounter:      0x" << (size_t)&counter     - (size_t)this
-   //     << "\n\tval_0004:     0x" << (size_t)&val_0004    - (size_t)this
-        << "\n\tinternalKeys: 0x" << (size_t)internalKeys - (size_t)this
-        << "\n\texternalKeys: 0x" << (size_t)externalKeys - (size_t)this
-        << "\n\tval_1388:     0x" << (size_t)&val_1388    - (size_t)this
-        << std::endl;
-
     uint32_t *keys;
     uint32_t uVar4;
     uint32_t uVar5;
+
     std::memset(internalKeys, 0, 624 * 4);
     std::memset(externalKeys, 0, 624 * 4);
+
     keys = internalKeys + 1;
     for (int i = 0x68; i != 0; i--) {
         uVar4 = seed * 0x10dcd + 1;
@@ -47,16 +41,6 @@ KeyTable::KeyTable(int seed)
         seed = uVar5 * 0x10dcd + 1;
         keys += 6;
     }
-  //  val_0004 = 0;
-
-// #ifdef NDEBUG
-//     std::string fname("init_table.dat");
-// #else
-//     std::string fname("init_table_d.dat");
-// #endif
-//     std::ofstream f(fname, std::ios::binary);
-//     f.write((char*)internalKeys, sizeof(internalKeys));
-//     f.close();
 
     val_1388 = 1;
     update();
@@ -109,5 +93,4 @@ void KeyTable::update()
         uVar2 = internalKeys_1[i * 2 + 1];
     }
     counter = 0;
-    return;
 }

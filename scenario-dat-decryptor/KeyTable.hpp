@@ -6,7 +6,6 @@ struct KeyTable
 public:
     uint32_t counter;
 private:
- //   uint32_t val_0004;
     uint32_t internalKeys[625];
 public:
     uint32_t externalKeys[624];
