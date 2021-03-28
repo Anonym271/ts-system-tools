@@ -1,0 +1,58 @@
+//------------------------------------------------
+//--- 010 Editor v11.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+typedef struct
+{
+    uint32 length;
+    char data[length];
+}  String <optimize=false>;
+
+struct
+{
+    uint32 count;
+    String names[count];
+} variables;
+
+typedef struct
+{
+    uint32 unknown1;
+    uint32 unknown2;
+    String name;
+    uint32 size;
+    uint32 data[size];
+} Integer <optimize=false>;
+
+struct
+{
+    uint32 count;
+    Integer values[count];
+} integers;
+
+
+typedef struct
+{
+    uint32 opcode;
+    uint32 length;
+    byte data[length];
+} Instruction <optimize=false>;
+
+struct
+{
+    uint32 size;
+    local uint32 lastOpcode = 1;
+    local int i;
+    for (i = 0; lastOpcode != 0; i++)
+    {
+        Instruction instruction;
+        lastOpcode = instruction.opcode;
+    }
+} program;
