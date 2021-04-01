@@ -6,6 +6,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scenario-disasm", "scenario
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scenario-decrypt", "scenario-decrypt\scenario-decrypt.vcxproj", "{33B590B7-6B3D-4C23-84C9-2CF62F615824}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scenario-asm", "scenario-asm\scenario-asm.vcxproj", "{827D2932-74A4-40B5-8123-10AD5FB23FA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -20,6 +22,10 @@ Global
 		{33B590B7-6B3D-4C23-84C9-2CF62F615824}.Debug|x64.Build.0 = Debug|x64
 		{33B590B7-6B3D-4C23-84C9-2CF62F615824}.Release|x64.ActiveCfg = Release|x64
 		{33B590B7-6B3D-4C23-84C9-2CF62F615824}.Release|x64.Build.0 = Release|x64
+		{827D2932-74A4-40B5-8123-10AD5FB23FA8}.Debug|x64.ActiveCfg = Debug|x64
+		{827D2932-74A4-40B5-8123-10AD5FB23FA8}.Debug|x64.Build.0 = Debug|x64
+		{827D2932-74A4-40B5-8123-10AD5FB23FA8}.Release|x64.ActiveCfg = Release|x64
+		{827D2932-74A4-40B5-8123-10AD5FB23FA8}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
