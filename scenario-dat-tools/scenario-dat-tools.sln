@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scenario-disasm", "scenario-disasm\scenario-disasm.vcxproj", "{0D2916DC-813E-44BB-B088-84E406DA3FF5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scenario-decrypt", "scenario-decrypt\scenario-decrypt.vcxproj", "{33B590B7-6B3D-4C23-84C9-2CF62F615824}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D2916DC-813E-44BB-B088-84E406DA3FF5}.Debug|x64.ActiveCfg = Debug|x64
+		{0D2916DC-813E-44BB-B088-84E406DA3FF5}.Debug|x64.Build.0 = Debug|x64
+		{0D2916DC-813E-44BB-B088-84E406DA3FF5}.Release|x64.ActiveCfg = Release|x64
+		{0D2916DC-813E-44BB-B088-84E406DA3FF5}.Release|x64.Build.0 = Release|x64
+		{33B590B7-6B3D-4C23-84C9-2CF62F615824}.Debug|x64.ActiveCfg = Debug|x64
+		{33B590B7-6B3D-4C23-84C9-2CF62F615824}.Debug|x64.Build.0 = Debug|x64
+		{33B590B7-6B3D-4C23-84C9-2CF62F615824}.Release|x64.ActiveCfg = Release|x64
+		{33B590B7-6B3D-4C23-84C9-2CF62F615824}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F39D2A39-4923-4032-8ADA-F3440AEF745F}
+	EndGlobalSection
+EndGlobal
