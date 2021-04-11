@@ -10,6 +10,8 @@ This repository currently contains:
 ## Building
 I am sorry to say that I have not yet put much effort into a comfortable build system or anything, for now the C++ projects are just regular VS project files. You will have to tweak the settings for the individual projects by yourself (especially mind the include paths, library paths and used dlls). The good news is that the program currently consists of very few files, so even building with g++ and command line should not be too hard to achieve.
 
+If you are using Win64, you should try the binary release though. I didn't try it on another pc, but it should work. Please create an issue if it doesn't.
+
 External libraries I am using:
 * ICU for converting between Shift-JIS and UTF-8 encoding
 * RE:flex for the unicode supporting lexical analyzer
