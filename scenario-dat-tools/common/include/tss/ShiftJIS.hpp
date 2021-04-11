@@ -19,7 +19,7 @@ namespace tss
 			icu::UnicodeString ucs(text, size, "utf8");
 			std::vector<char> result(size * 4);
 			auto length = ucs.extract(0, ucs.length(), result.data(), "shift_jis");
-			result.resize(length - 1);
+			result.resize(length);
 			return std::move(result);
 		}
 		static std::vector<char> from_utf8_esc(const std::vector<char>& text)

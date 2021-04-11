@@ -22,7 +22,7 @@ int main(int argc, const char** argv)
         std::string filename(argv[1]);
         
         tss::ScenarioDisassembler disasm(tss::ScenarioDisassembler::UTF8);
-        disasm.disassemble(filename, ".\\Scenario");
+      //  disasm.disassemble(filename, ".\\Scenario");
         disasm.disassemble_raw(filename, "scenario_raw.tsa");
     }
     catch (const std::exception& exc)

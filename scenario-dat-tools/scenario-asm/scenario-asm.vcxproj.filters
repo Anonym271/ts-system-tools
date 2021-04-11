@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Lex">
+      <UniqueIdentifier>{3063e546-5418-45fa-9599-f7e8c3193514}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="scenario-asm.cpp">
@@ -22,6 +25,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\common\src\Scenario.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lex.yy.cpp">
+      <Filter>Lex</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Program Files\re-flex\lib\input.cpp">
+      <Filter>Lex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\src\Opcode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Program Files\re-flex\lib\matcher.cpp">
+      <Filter>Lex</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Program Files\re-flex\lib\pattern.cpp">
+      <Filter>Lex</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Program Files\re-flex\lib\error.cpp">
+      <Filter>Lex</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,11 +59,19 @@
     <ClInclude Include="..\common\include\tss\Scenario.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\common\include\tss\ScenarioDisassembler.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\common\include\tss\ShiftJIS.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lex.yy.h">
+      <Filter>Lex</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="tsa.l">
+      <Filter>Lex</Filter>
+    </None>
   </ItemGroup>
 </Project>

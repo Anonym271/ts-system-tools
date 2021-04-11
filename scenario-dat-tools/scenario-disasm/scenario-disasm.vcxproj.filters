@@ -24,6 +24,9 @@
     <ClCompile Include="..\common\src\KeyTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\common\src\Opcode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\include\tss\Scenario.hpp">

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <map>
 #include <unordered_map>
+//#include <unordered_set>
 
 #include "Scenario.hpp"
 #include "ShiftJIS.hpp"
@@ -28,87 +29,8 @@ namespace tss
 
         ScenarioDisassembler(Options options = NO_OPTIONS) :
             options(options)
-        {
-
-        }
-
-        void disassemble(const std::string& filename, const std::string& out_dir)
-        {
-            auto scenario = Scenario::load(filename);
-            disassemble(scenario, out_dir);
-        }
-
-        void disassemble(const Scenario& scenario, const std::string& out_dir)
-        {
-            namespace fs = std::filesystem;
-            fs::path dirpath(out_dir);
-            fs::create_directories(dirpath);
-            if (options & DEBUG)
-                std::cout << "Created directory " << dirpath << std::endl;
-
-            fs::path current_path(dirpath / "main.tsa");
-            if (options & DEBUG)
-                std::cout << "> " << current_path << std::endl;
-            std::ofstream main_file(current_path);
-            main_file << "/encoding shift-jis\n\n";
-            for (auto& var : scenario.variables())
-                main_file << "/def " << var << '\n';
-
-            std::multimap<std::string, Scene> scenes;
-            for (auto& scene : scenario.scenes())
-            {
-                int at_pos = scene.name().find('@');
-                if (at_pos >= 0)
-                {
-                    scenes.emplace(
-                        std::piecewise_construct,
-                        std::forward_as_tuple(scene.name().substr(0, at_pos)),
-                        std::forward_as_tuple(scene.name().substr(at_pos + 1), scene.data(), scene.offset()));
-                }
-                else
-                {
-                    scenes.emplace(scene.name(), scene);
-                }
-            }
-
-
-            auto link_it = scenes.find("_link");
-            if (link_it != scenes.end())
-            {
-                main_file << '\n' << std::hex << std::left;
-                do {
-                    if (link_it->second.name() == "_link")
-                        link_it->second.name("main");
-                    write_scene(main_file, scenario, link_it->second);
-                    scenes.erase(link_it++);
-                } while (link_it != scenes.end() && link_it->first == "_link");
-                main_file << std::dec;
-            }
-
-            std::ofstream file;
-            file << std::left;
-
-            for (auto it = scenes.begin(); it != scenes.end();)
-            {
-                const std::string& name = it->first;
-
-                current_path = dirpath / (name + ".tsa");
-                main_file << "\n/import " << current_path.filename();
-                if (options & DEBUG)
-                    std::cout << "> " << current_path << std::endl;
-                file.open(current_path);
-
-                do {
-                    write_scene(file, scenario, it->second);
-                    ++it;
-                } while (it != scenes.end() && name == it->first);
-                file.close();
-            }
-
-            if (options & DEBUG)
-                std::cout << "Done.\n";
-        }
-
+        { }
+        
         void disassemble_raw(const std::string& in_filename, const std::string& out_filename)
         {
             auto scenario = Scenario::load(in_filename);
@@ -118,11 +40,28 @@ namespace tss
         {
             std::unordered_map<uint32_t, std::string> frames;
             for (const Scene& scn : scenario.scenes())
-            {
                 frames.insert(std::make_pair(scn.offset(), scn.name()));
+
+            std::map<uint32_t, std::pair<std::string, std::string>> additional_jumps;
+            for (const Scene& scn : scenario.scenes())
+            {
+                std::string name;
                 int i = 0;
                 for (uint32_t offset : scn.data())
-                    frames.insert(std::make_pair(offset, "# " + scn.name() + "." + std::to_string(i++)));
+                {
+                    name = scn.name() + "." + std::to_string(i);
+                    auto ins_res = frames.insert(std::make_pair(offset, name));
+                    if (!ins_res.second)
+                    {
+                        std::cout << "Info: offset 0x" << std::hex << std::setw(8) << std::setfill('0') << offset
+                            << ": frame " << std::dec << i << " of scene " << scn.name()
+                            << " collides with base address of scene " << ins_res.first->second
+                            << ". Inserting additional jump statement.\n";
+                        additional_jumps.insert(std::make_pair(offset, std::make_pair(name, ins_res.first->second)));
+                    }
+                    frames.insert(std::make_pair(offset, name));
+                    i++;
+                }
             }
 
             std::ofstream file(out_filename);
@@ -132,24 +71,39 @@ namespace tss
             const char* start = scenario.binaries().data();
             uint32_t end = scenario.binaries().size();
             uint32_t pos = 0;
+            auto add_it = additional_jumps.begin(), add_end = additional_jumps.end();
             while (pos < end)
             {
+                if (add_it != add_end && pos == add_it->first)
+                {
+                    // additional jump at this position
+                    file << "# " << add_it->second.first << ":\n";
+                    file << "\t(" << std::right << std::setfill('0') << std::setw(8) << pos << std::setfill(' ') << std::left << ")   ";
+                    write_opcode(file, Opcode::JUMP);
+                    write_arg(file, Opcode::JUMP, add_it->second.second.data(), add_it->second.second.length());
+                    file.put('\n');
+                    ++add_it;
+                }
+
                 auto it = frames.find(pos);
                 if (it != frames.end())
-                    file << it->second << ":\n";
+                    file << "# " << it->second << '\n';
+                file << "\t(" << std::right << std::setfill('0') << std::setw(8) << pos << std::setfill(' ') << std::left << ")   ";
+
                 opcode = *(int*)(start + pos);
                 pos += 4;
+
                 if (opcode == 0)
                     break;
                 arglen = *(int*)(start + pos);
                 pos += 4;
-                file << "\t(" << std::right << std::setfill('0') << std::setw(8) << pos << std::setfill(' ') << std::left << ")   ";
                 write_opcode(file, (Opcode)opcode);
                 if (arglen > 0)
                 {
                     write_arg(file, (Opcode)opcode, (start + pos), arglen);
                     pos += arglen;
                 }
+
                 file.put('\n');
             }
         }

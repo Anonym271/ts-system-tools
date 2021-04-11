@@ -12,7 +12,7 @@ namespace tss
         uint32_t uVar4;
         uint32_t uVar5;
 
-        std::memset(internalKeys, 0, 624 * 4);
+        std::memset(internalKeys, 0, 625 * 4);
         std::memset(externalKeys, 0, 624 * 4);
 
         keys = internalKeys + 1;
