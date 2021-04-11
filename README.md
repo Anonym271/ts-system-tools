@@ -3,6 +3,7 @@ A collection of handmade tools for the VN engine I call "TS System" (used in the
 
 This repository currently contains:
 * A python script for unpacking and repacking the resource archives (.pak)
+* A C++ program that does exactly the same
 * A C++ program to decrypt the Scenario.dat file
 * A C++ program to disassemble the Scenario.dat into readable, assembly-like code (I call this code TSA for TS assembly)
 * A C++ program to reassemble modificated scenario files into a .dat file that the game accepts
