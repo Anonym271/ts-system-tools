@@ -6,7 +6,7 @@ This repository currently contains:
 * A C++ program that does exactly the same
 * A C++ program to **decrypt** the Scenario.dat file
 * A C++ program to **disassemble** the Scenario.dat into readable, assembly-like code (I call this code TSA for TS assembly)
-* A C++ program to **reassemble** modificated scenario files into a .dat file that the game accepts
+* A C++ program to **reassemble** modified scenario files into a .dat file that the game accepts
 
 ## Wiki
 The [wiki](https://github.com/Anonym271/ts-system-tools/wiki) contains much useful information if you want to know how the scripting system works. I am updating it frequently (or at least: as frequent as I am working on this project) and it usually contains my state of knowledge.
