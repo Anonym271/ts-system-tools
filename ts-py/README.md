@@ -15,4 +15,5 @@ Use this command to create furigana for the file `scenario.dat`. Options:
 - `-o output.dat`: Output file. Default is `out.dat`
 - `-D`: do not decrypt the input file (because it is already stored in decrypted form)
 - `-E`: do not encrypt the output file when saving
+
 Default behaviour is to use decryption and encryption since this is the way the game files are found naturally.
