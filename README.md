@@ -1,12 +1,13 @@
 # ts-system-tools
-A collection of handmade tools for the VN engine I call "TS System" (used in the eroge "Tropical Kiss")
+A collection of tools for the VN engine I call "TS System" (used in the eroge "Tropical Kiss")
 
 This repository currently contains:
-* A python script for **unpacking** and **repacking** the resource archives (.pak)
-* A C++ program that does exactly the same
+* A python script for **unpacking** and **repacking** the resource archives (.pak) (pak-tools/python)
+* A C++ program that does exactly the same (pak-tools/cpp)
 * A C++ program to **decrypt** the Scenario.dat file
 * A C++ program to **disassemble** the Scenario.dat into readable, assembly-like code (I call this code TSA for TS assembly)
 * A C++ program to **reassemble** modified scenario files into a .dat file that the game accepts
+* A python "library" to work with scenario.dat files (ts-py)
 
 ## Wiki
 The [wiki](https://github.com/Anonym271/ts-system-tools/wiki) contains much useful information if you want to know how the scripting system works. I am updating it frequently (or at least: as frequent as I am working on this project) and it usually contains my state of knowledge.
